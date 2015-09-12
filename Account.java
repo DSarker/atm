@@ -80,13 +80,15 @@ public class Account {
 	/**
 	 * Print the transaction history of the account
 	 */
-	public void printTransHistory() {
+	public void printTransHistory(Gui gui) {
 
-		System.out.printf("\nTransaction history for account: %s\n", this.uuid);
+		gui.appendMainDisplay(String.format(
+				"\n\nTransaction history for account: %s\n   ", this.uuid));
 		for (int t = this.transactions.size() - 1; t >= 0; t--) {
-			System.out.println(this.transactions.get(t).getSummaryLine());
+			gui.appendMainDisplay(this.transactions.get(t).getSummaryLine());
+			gui.appendMainDisplay("\n   ");
 		}
-		System.out.println();
+		gui.appendMainDisplay("\n\n\n");
 	}
 
 	/**
@@ -103,5 +105,4 @@ public class Account {
 		Transaction newTrans = new Transaction(amount, this, memo);
 		this.transactions.add(newTrans);
 	}
-
 }

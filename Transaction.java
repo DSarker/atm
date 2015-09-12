@@ -1,3 +1,5 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Transaction {
@@ -5,8 +7,9 @@ public class Transaction {
 	// The amount of this transaction
 	private double amount;
 
-	// The time and date of this transaction
-	private Date timestamp;
+	private String date;
+
+	private DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
 	// A memo for this transaction
 	private String memo;
@@ -26,7 +29,7 @@ public class Transaction {
 
 		this.amount = amount;
 		this.inAccount = inAccount;
-		this.timestamp = new Date();
+		this.date = (formatter.format(new Date()));
 		this.memo = "";
 	}
 
@@ -66,12 +69,12 @@ public class Transaction {
 	public String getSummaryLine() {
 
 		if (this.amount >= 0) {
-			return String.format("%s : $%.02f : %s", this.timestamp.toString(),
-					this.amount, this.memo);
+			return String.format("%s : $%.02f : %s", this.date, this.amount,
+					this.memo);
 
 		} else {
-			return String.format("%s : $(%.02f): %s",
-					this.timestamp.toString(), -this.amount, this.memo);
+			return String.format("%s : $(%.02f): %s", this.date, -this.amount,
+					this.memo);
 		}
 	}
 }

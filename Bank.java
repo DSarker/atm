@@ -19,7 +19,7 @@ public class Bank {
 	 *            The name of the bank
 	 */
 	public Bank(String name) {
-		
+
 		this.name = name;
 		this.users = new ArrayList<User>();
 		this.accounts = new ArrayList<Account>();
@@ -60,6 +60,11 @@ public class Bank {
 		return uuid;
 	}
 
+	/**
+	 * Gets a new universally unique identifier
+	 * 
+	 * @return The new UUID
+	 */
 	public String getNewAccountUUID() {
 
 		// Initialize

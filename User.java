@@ -55,8 +55,9 @@ public class User {
 		this.accounts = new ArrayList<Account>();
 
 		// Print out a log message
-		System.out.printf("New user %s, %s with ID %s created.\n", lastName,
-				firstName, this.uuid);
+		System.out.printf("Created test user %s %s.\n" + "Bank: %s\n"
+				+ "User ID: %s\n" + "PIN: %s ", firstName, lastName,
+				bank.getName(), this.uuid, pin);
 	}
 
 	/**
@@ -83,7 +84,7 @@ public class User {
 	 * 
 	 * @param pin
 	 *            The ping to check
-	 * @return Where the pin is valid or not
+	 * @return Whether the pin is valid or not
 	 */
 	public boolean validatePin(String pin) {
 
@@ -96,7 +97,7 @@ public class User {
 			System.out.println("NoSuchAlgorithmException caught");
 			e.printStackTrace();
 		}
-		
+
 		return false;
 	}
 
@@ -109,12 +110,13 @@ public class User {
 		return this.firstName;
 	}
 
-	public void printAccountsSummary() {
+	public void printAccountsSummary(Gui gui) {
 
-		System.out.printf("\n\n%s's accounts summary:\n", this.firstName);
+		gui.appendMainDisplay(String.format("%s's accounts summary:\n   ",
+				this.firstName));
 		for (int a = 0; a < this.accounts.size(); a++) {
-			System.out.printf("%d) %s\n", a + 1, this.accounts.get(a)
-					.getSummaryLine());
+			gui.appendMainDisplay(String.format("%d) %s\n   ", a + 1,
+					this.accounts.get(a).getSummaryLine()));
 		}
 		System.out.println();
 	}
@@ -133,9 +135,11 @@ public class User {
 	 * 
 	 * @param accountIdx
 	 *            The index of the account to use
+	 * @param gui
+	 *            The Gui object used for user input
 	 */
-	public void printAccountSummary(int accountIndex) {
-		this.accounts.get(accountIndex).printTransHistory();
+	public void printAccountSummary(int accountIndex, Gui gui) {
+		this.accounts.get(accountIndex).printTransHistory(gui);
 	}
 
 	/**
