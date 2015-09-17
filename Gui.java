@@ -528,11 +528,7 @@ public class Gui extends JFrame implements KeyListener {
 		String text;
 
 		while (!inputStatus) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			Thread.yield();
 		}
 
 		inputStatus = false;
